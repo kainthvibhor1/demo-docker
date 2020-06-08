@@ -28,18 +28,16 @@ and running with the MongoDB instance.
 
 ## Running the docker file
 
+**PREREQUISITE**: Make sure a docker network exists of the name spring-network `docker network create spring-network`
+This is required to ensure that both of the docker containers can talk with each other.
+
 1. Run the below to launch a new mongo container with username, password, and database specified.
 
-    * ```bash
-
-    docker container run -p 27017:27017 -d --name db -e \
-        MONGO_INITDB_ROOT_USERNAME=root \
-        MONGO_INITDB_ROOT_PASSWORD=root \
-        MONGO_INITDB_DATABASE=admin mongo```
+    * `docker container run -p 27017:27017 -d --name db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=root -e MONGO_INITDB_DATABASE=admin --network=spring-network mongo`
 
 2. Run `./mvnw package dockerfile:build` to prepare the image
 
-3. Run `docker container run -p 8080:8080 --name spring -d demoapp/goal` to run the docker image
+3. Run `docker container run -p 8080:8080 -d --name spring --network=spring-network -d vkainth/demoapp` to run the docker image
 
 4. Run `docker container logs -f spring` to monitor the logs
 
@@ -50,3 +48,15 @@ and running with the MongoDB instance.
 1. Update the mongo database URI in the application-docker.properties file (The application uses Spring Profiles for separation)
 
 2. Update the mongo database information in step 1 of **Running the docker file** if updating step 1 above
+
+## Pushing the docker image
+
+1. Change `docker.image.prefix` in pom.xml
+
+2. Run `./mvnw package dockerfile:build` to build the project
+
+3. Run `docker login` to login to docker hub
+
+4. Run `docker image ls` to view the image just built
+
+5. Run `docker push <your-username>/<your-appname>` to push the image
