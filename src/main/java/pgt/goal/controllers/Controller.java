@@ -45,7 +45,7 @@ public class Controller {
         return ResponseEntity.ok(allUsers);
     }
 
-    @GetMapping("/user/<id>")
+    @GetMapping("/user/{id}")
     public ResponseEntity<List<User>> getUserById(@PathVariable String id) {
         List<User> users = new ArrayList<>();
         try {
