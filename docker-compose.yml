@@ -2,19 +2,23 @@ version: "3.8"
 
 services:
   java:
-    image: custom-spring
+    image: demoapp/goal
     build: .
     ports:
      - "8080:8080"
     depends_on:
      - db
     environment:
-      spring.data.mongodb.host: db
-      spring.data.mongodb.user: root
-      spring.data.mongodb.password: root
+      spring.profiles.active: docker
   db:
     image: mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: admin
+    volumes:
+     - db-data:/data/db
+
+volumes:
+  db-data:
   

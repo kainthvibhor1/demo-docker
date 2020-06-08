@@ -1,17 +1,13 @@
 FROM openjdk:8-jdk-alpine
 
-RUN mkdir -p /usr/local/spring/app
+ENV SPRING_PROFILES_ACTIVE docker
 
-WORKDIR /usr/local/spring/app
+RUN mkdir -p /build
 
-COPY . .
+WORKDIR /build
 
-RUN chmod 777 mvnw
+ARG JAR_FILE
 
-RUN ./mvnw clean install -DskipTests
+COPY ${JAR_FILE} app.jar
 
-COPY target/goal-0.0.1-SNAPSHOT.jar .
-
-EXPOSE 8080
-
-CMD [ "java", "-jar", "./goal-0.0.1-SNAPSHOT.jar" ]
+ENTRYPOINT [ "java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.jar" ]
