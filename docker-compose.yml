@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   java:
-    image: demoapp/goal
+    image: vkainth/demoapp
     build: .
     ports:
      - "8080:8080"

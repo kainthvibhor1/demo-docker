@@ -33,11 +33,11 @@ This is required to ensure that both of the docker containers can talk with each
 
 1. Run the below to launch a new mongo container with username, password, and database specified.
 
-    * `docker container run -p 27017:27017 -d --name db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=root -e MONGO_INITDB_DATABASE=admin --network=spring-network mongo`
+    * `docker container run -p 27017:27017 -d --name db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=root -e MONGO_INITDB_DATABASE=admin --network=spring-network -v mongo-data:/data/db mongo`
 
 2. Run `./mvnw package dockerfile:build` to prepare the image
 
-3. Run `docker container run -p 8080:8080 -d --name spring --network=spring-network -d vkainth/demoapp` to run the docker image
+3. Run `docker container run -p 8080:8080 -d --name spring --network=spring-network vkainth/demoapp` to run the docker image
 
 4. Run `docker container logs -f spring` to monitor the logs
 
