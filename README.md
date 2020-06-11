@@ -43,6 +43,8 @@ This is required to ensure that both of the docker containers can talk with each
 
 5. Navigate to `localhost:8080` to view the results
 
+6. Navigate to `localhost:8080/swagger-ui.html` to view the Swagger Documentation page. The tab `controller` contains the docs
+
 ## Configuring the application
 
 1. Update the mongo database URI in the application-docker.properties file (The application uses Spring Profiles for separation)
