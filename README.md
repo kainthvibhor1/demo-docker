@@ -60,3 +60,19 @@ This is required to ensure that both of the docker containers can talk with each
 4. Run `docker image ls` to view the image just built
 
 5. Run `docker push <your-username>/<your-appname>` to push the image
+
+## Running in Kubernetes
+
+1. Ensure a Kubernetes instance is enabled and running
+
+2. From top-level directory (with kube folder), run `kubectl apply -f kube`
+
+3. Run `kubectl get pods -w` and wait until all replicas are running
+
+4. Exit out of the watch by pressing `CTRL-c`
+
+5. Run `kubectl get services` and make note of the port number for spring-app
+
+6. From your browser, navigate to `localhost:<port-number-from-step-5>`
+
+7. With swagger, navigate to `localhost:<port-from-step-5>/swagger-ui.html` to view the API details
