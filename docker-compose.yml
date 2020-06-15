@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.4"
 
 services:
   java:
@@ -22,5 +22,6 @@ services:
 
 volumes:
   db-data:
-    external: true
+    external:
+      name: db-data
   
