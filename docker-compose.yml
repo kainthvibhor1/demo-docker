@@ -3,7 +3,6 @@ version: "3.8"
 services:
   java:
     image: vkainth/demoapp
-    build: .
     ports:
      - "8080:8080"
     depends_on:
@@ -21,4 +20,5 @@ services:
 
 volumes:
   db-data:
+    external: true
   
