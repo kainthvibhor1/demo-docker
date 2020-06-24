@@ -1,15 +1,11 @@
-FROM openjdk:8-jdk-alpine
+FROM tomcat:9.0.36-jdk8-adoptopenjdk-openj9
 
 ENV SPRING_PROFILES_ACTIVE docker
 
-RUN mkdir -p /build
+ARG WAR_FILE
 
-WORKDIR /build
-
-ARG JAR_FILE
-
-COPY ${JAR_FILE} app.jar
+COPY ${WAR_FILE} /usr/local/tomcat/webapps/ROOT.war
 
 EXPOSE 8080
 
-ENTRYPOINT [ "java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.jar" ]
+CMD [ "catalina.sh", "run" ]
